@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                      String        @id @default(cuid())
+  email                   String        @unique
+  passwordHash            String
+  firstName               String?
+  lastName                String?
+  tier                    String        @default("free")
+  blueprintLimit          Int           @default(1)
+  blueprintsUsedThisMonth Int           @default(0)
+  monthlyResetDate        DateTime      @default(now())
+  createdAt               DateTime      @default(now())
+  updatedAt               DateTime      @updatedAt
+  lastLoginAt             DateTime?
+  activityLogs            ActivityLog[]
+  blueprints              Blueprint[]
+}
+
+model Blueprint {
+  id                   String        @id @default(cuid())
+  userId               String
+  startupIdea          String
+  industry             String?
+  targetGeography      String?
+  estimatedMarketSize  Int?
+  output               String
+  tam                  Float?
+  growthRate           Float?
+  competitiveIntensity String?
+  generatedAt          DateTime      @default(now())
+  generationTimeMs     Int?
+  groqTokensUsed       Int?
+  isPublic             Boolean       @default(false)
+  shareToken           String?       @unique
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+  activityLogs         ActivityLog[]
+  user                 User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ActivityLog {
+  id          String     @id @default(cuid())
+  userId      String
+  blueprintId String?
+  action      String
+  metadata    String?
+  createdAt   DateTime   @default(now())
+  blueprint   Blueprint? @relation(fields: [blueprintId], references: [id])
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
