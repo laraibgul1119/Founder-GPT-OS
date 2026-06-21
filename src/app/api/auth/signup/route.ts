@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { hashPassword, setSessionCookie } from '@/lib/auth';
+import { hashPassword, setSessionCookie, sanitizeUser } from '@/lib/auth';
 
 export async function POST(request: Request) {
   try {
@@ -48,12 +48,7 @@ export async function POST(request: Request) {
 
     await setSessionCookie(user.id);
 
-    return NextResponse.json({
-      id: user.id,
-      email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
-    });
+    return NextResponse.json(sanitizeUser(user));
   } catch (error: any) {
     console.error('Error in POST /api/auth/signup:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

@@ -8,13 +8,9 @@ import {
   Plus, 
   Briefcase, 
   Trash2, 
-  Eye, 
   Calendar, 
-  TrendingUp, 
-  ShieldAlert,
   Sparkles,
   ArrowRight,
-  TrendingDown,
   Loader2
 } from 'lucide-react';
 

@@ -4,12 +4,26 @@ import { cookies } from 'next/headers';
 import bcrypt from 'bcryptjs';
 
 const SESSION_COOKIE = 'session';
+
+const JWT_SECRET_RAW = process.env.JWT_SECRET;
+if (!JWT_SECRET_RAW) {
+  console.warn('[SECURITY] JWT_SECRET is not set. Using insecure default. Set JWT_SECRET in your environment.');
+}
 const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET || 'foundergpt-default-secret-change-in-production'
+  JWT_SECRET_RAW || 'foundergpt-default-secret-change-in-production'
 );
 
 export interface SessionPayload {
   userId: string;
+}
+
+export type SafeUser = Omit<Awaited<ReturnType<typeof db.user.findUnique>> & {}, 'passwordHash'>;
+
+export function sanitizeUser(user: any): SafeUser | null {
+  if (!user) return null;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { passwordHash, ...safeUser } = user;
+  return safeUser;
 }
 
 export async function createSessionToken(userId: string): Promise<string> {

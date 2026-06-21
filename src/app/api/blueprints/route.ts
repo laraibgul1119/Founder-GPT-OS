@@ -109,7 +109,13 @@ Generate a complete business plan in the following JSON structure:
       "demographics": "string",
       "pain_points": ["string"],
       "willingness_to_pay": "string",
-      "cac_estimate": "string"
+      "cac_estimate": "string",
+      "contact_info": {
+        "email": "string - likely professional email of this persona type",
+        "linkedin": "string - LinkedIn profile URL pattern for this persona",
+        "twitter": "string - Twitter/X handle for this persona type",
+        "company_website": "string - company or personal website URL"
+      }
     }
   ],
   "go_to_market": {

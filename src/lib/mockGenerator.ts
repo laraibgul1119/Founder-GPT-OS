@@ -21,6 +21,12 @@ export interface BlueprintOutput {
     pain_points: string[];
     willingness_to_pay: string;
     cac_estimate: string;
+    contact_info: {
+      email: string;
+      linkedin: string;
+      twitter: string;
+      company_website: string;
+    };
   }>;
   go_to_market: {
     channels: Array<{
@@ -69,7 +75,6 @@ export interface BlueprintOutput {
 export function generateMockBlueprint(idea: string, industry?: string, geography?: string): BlueprintOutput {
   const normalizedIdea = idea.toLowerCase();
   const geo = geography || 'Global';
-  const ind = industry || 'SaaS';
 
   // Base values depending on the idea keywords
   let category = 'SaaS';
@@ -142,7 +147,13 @@ export function generateMockBlueprint(idea: string, industry?: string, geography
         'Struggles with inefficient communication in hybrid teams'
       ],
       willingness_to_pay: '$19 - $39 / month',
-      cac_estimate: '$85.00'
+      cac_estimate: '$85.00',
+      contact_info: {
+        email: 'dave.dev@outlook.com',
+        linkedin: 'linkedin.com/in/dave-developer',
+        twitter: '@busydevdave',
+        company_website: 'davedeveloper.dev'
+      }
     },
     {
       name: 'Strategic Manager Sarah',
@@ -154,7 +165,13 @@ export function generateMockBlueprint(idea: string, industry?: string, geography
         'Frustrated with lack of automation in executive reports'
       ],
       willingness_to_pay: '$49 - $99 / month',
-      cac_estimate: '$150.00'
+      cac_estimate: '$150.00',
+      contact_info: {
+        email: 'sarah.j@techcorp.io',
+        linkedin: 'linkedin.com/in/sarah-product-director',
+        twitter: '@strategicsarah',
+        company_website: 'techcorp.io/team'
+      }
     },
     {
       name: 'Founder Frank',
@@ -166,7 +183,13 @@ export function generateMockBlueprint(idea: string, industry?: string, geography
         'Struggles to validate market sizes and customer profiles with data'
       ],
       willingness_to_pay: '$29 - $49 / month',
-      cac_estimate: '$45.00'
+      cac_estimate: '$45.00',
+      contact_info: {
+        email: 'frank@foundermail.co',
+        linkedin: 'linkedin.com/in/frank-founder',
+        twitter: '@founderfrank',
+        company_website: 'frankstartups.com'
+      }
     }
   ];
 

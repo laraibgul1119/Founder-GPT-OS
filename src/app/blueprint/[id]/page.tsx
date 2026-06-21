@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import { 
-  Briefcase,
   TrendingUp, 
   Target, 
   Users, 
@@ -15,14 +14,15 @@ import {
   FileText,
   Share2,
   Trash2,
-  Calendar,
   Download,
   CheckCircle2,
   Info,
-  ChevronRight,
   ArrowLeft,
-  Sparkles,
-  Loader2
+  Loader2,
+  Mail,
+  Link as LinkIcon,
+  AtSign,
+  Globe
 } from 'lucide-react';
 
 export default function BlueprintDetail({ params }: { params: { id: string } }) {
@@ -353,6 +353,38 @@ export default function BlueprintDetail({ params }: { params: { id: string } }) 
                           ))}
                         </ul>
                       </div>
+
+                      {p.contact_info && (
+                        <div className="mt-4 pt-3 border-t border-slate-900">
+                          <span className="text-[8px] uppercase tracking-wider font-bold text-slate-500 block mb-2">Contact & Social</span>
+                          <div className="space-y-1.5">
+                            {p.contact_info.email && (
+                              <div className="flex items-center gap-1.5 text-[10px] text-slate-400">
+                                <Mail className="h-3 w-3 text-slate-500 shrink-0" />
+                                <span className="truncate">{p.contact_info.email}</span>
+                              </div>
+                            )}
+                            {p.contact_info.linkedin && (
+                              <div className="flex items-center gap-1.5 text-[10px] text-slate-400">
+                                <LinkIcon className="h-3 w-3 text-slate-500 shrink-0" />
+                                <span className="truncate">{p.contact_info.linkedin}</span>
+                              </div>
+                            )}
+                            {p.contact_info.twitter && (
+                              <div className="flex items-center gap-1.5 text-[10px] text-slate-400">
+                                <AtSign className="h-3 w-3 text-slate-500 shrink-0" />
+                                <span className="truncate">{p.contact_info.twitter}</span>
+                              </div>
+                            )}
+                            {p.contact_info.company_website && (
+                              <div className="flex items-center gap-1.5 text-[10px] text-slate-400">
+                                <Globe className="h-3 w-3 text-slate-500 shrink-0" />
+                                <span className="truncate">{p.contact_info.company_website}</span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
                     </div>
 
                     <div className="mt-6 pt-3 border-t border-slate-900 flex justify-between items-center text-[9px] text-slate-400">

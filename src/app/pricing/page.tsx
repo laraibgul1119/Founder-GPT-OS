@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
-import { CheckCircle2, ArrowRight, ShieldCheck, Loader2 } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, Loader2 } from 'lucide-react';
 
 export default function Pricing() {
   const [upgradingPlan, setUpgradingPlan] = useState<string | null>(null);

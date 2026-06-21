@@ -1,21 +1,20 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-const publicRoutes = [
-  '/',
-  '/sign-in(.*)',
-  '/sign-up(.*)',
-  '/blueprint/(.*)',
-];
+const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
+let lastCleanup = Date.now();
+const CLEANUP_INTERVAL = 60_000;
 
-function isPublicRoute(pathname: string): boolean {
-  return publicRoutes.some((route) => {
-    const regex = new RegExp(`^${route}$`);
-    return regex.test(pathname);
+function cleanupRateLimitStore() {
+  const now = Date.now();
+  if (now - lastCleanup < CLEANUP_INTERVAL) return;
+  lastCleanup = now;
+  rateLimitStore.forEach((entry, key) => {
+    if (now > entry.resetTime) {
+      rateLimitStore.delete(key);
+    }
   });
 }
-
-const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
 
 function getRateLimitKey(request: NextRequest): string {
   const forwarded = request.headers.get('x-forwarded-for');
@@ -25,6 +24,7 @@ function getRateLimitKey(request: NextRequest): string {
 }
 
 function checkRateLimit(key: string, windowMs: number, maxRequests: number): boolean {
+  cleanupRateLimitStore();
   const now = Date.now();
   const entry = rateLimitStore.get(key);
 
@@ -42,6 +42,11 @@ function addSecurityHeaders(response: NextResponse, request: NextRequest): NextR
   response.headers.set('X-Frame-Options', 'DENY');
   response.headers.set('X-XSS-Protection', '1; mode=block');
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), interest-cohort=()');
+
+  if (process.env.NODE_ENV === 'production') {
+    response.headers.set('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload');
+  }
 
   const pathname = new URL(request.url).pathname;
 

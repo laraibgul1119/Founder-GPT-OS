@@ -9,11 +9,9 @@ import {
   DollarSign, 
   Map, 
   Sliders, 
-  Layers, 
   CheckCircle2, 
   ArrowRight,
-  ShieldCheck,
-  Star
+  ShieldCheck
 } from 'lucide-react';
 
 export default function LandingPage() {

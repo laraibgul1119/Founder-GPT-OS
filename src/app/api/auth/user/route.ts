@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getOrCreateUser, getAuthSession } from '@/lib/auth';
+import { getOrCreateUser, getAuthSession, sanitizeUser } from '@/lib/auth';
 import { db } from '@/lib/db';
 
 export async function GET() {
@@ -10,7 +10,7 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    return NextResponse.json(user);
+    return NextResponse.json(sanitizeUser(user));
   } catch (error: any) {
     console.error('Error in /api/auth/user:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
@@ -43,7 +43,7 @@ export async function PATCH(request: Request) {
       },
     });
 
-    return NextResponse.json(updatedUser);
+    return NextResponse.json(sanitizeUser(updatedUser));
   } catch (error: any) {
     console.error('Error in PATCH /api/auth/user:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
