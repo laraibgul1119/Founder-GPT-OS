@@ -148,25 +148,25 @@ export default function BlueprintDetail({ params }: { params: { id: string } }) 
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
         
         {/* Header Back & Action Buttons */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-slate-900 pb-5">
+        <div className="flex flex-col gap-4 border-b border-slate-900 pb-5">
           <div className="flex items-center gap-3">
             <button 
               onClick={() => router.push('/dashboard')}
-              className="flex items-center justify-center p-2 rounded-lg text-slate-400 hover:bg-slate-900 hover:text-white transition-colors"
+              className="flex items-center justify-center p-2 rounded-lg text-slate-400 hover:bg-slate-900 hover:text-white transition-colors shrink-0"
             >
               <ArrowLeft className="h-4 w-4" />
             </button>
-            <div>
+            <div className="min-w-0">
               <span className="text-[10px] uppercase font-bold tracking-wider text-cyan-400 bg-cyan-950/20 px-2 py-0.5 rounded border border-cyan-500/10">
                 {blueprint.industry || 'General SaaS'}
               </span>
-              <h2 className="text-lg font-bold text-white sm:text-xl line-clamp-1 mt-1">
+              <h2 className="text-base sm:text-lg font-bold text-white line-clamp-1 mt-1">
                 {blueprint.startupIdea}
               </h2>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={handleShare}
               className={`flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold border transition-all ${
@@ -176,7 +176,7 @@ export default function BlueprintDetail({ params }: { params: { id: string } }) 
               }`}
             >
               <Share2 className="h-3.5 w-3.5" />
-              {copiedLink ? 'Copied URL!' : 'Share'}
+              {copiedLink ? 'Copied!' : 'Share'}
             </button>
 
             <button
@@ -189,7 +189,7 @@ export default function BlueprintDetail({ params }: { params: { id: string } }) 
               ) : (
                 <Download className="h-3.5 w-3.5" />
               )}
-              {exporting ? 'Exporting...' : 'Export'}
+              <span className="hidden sm:inline">{exporting ? 'Exporting...' : 'Export'}</span>
             </button>
 
             <button
@@ -203,7 +203,7 @@ export default function BlueprintDetail({ params }: { params: { id: string } }) 
         </div>
 
         {/* Tab Navigation Menu */}
-        <div className="flex overflow-x-auto gap-1 border-b border-slate-900 pb-px scrollbar-none">
+        <div className="flex overflow-x-auto gap-1 border-b border-slate-900 pb-px scrollbar-none scroll-fade-right">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -225,7 +225,7 @@ export default function BlueprintDetail({ params }: { params: { id: string } }) 
         </div>
 
         {/* Tab Contents panel */}
-        <div className="rounded-2xl border border-slate-900 bg-slate-900/20 p-6 glass min-h-[350px]">
+        <div className="rounded-2xl border border-slate-900 bg-slate-900/20 p-4 sm:p-6 glass min-h-[350px]">
           
           {/* TAB 1: Market Analysis */}
           {activeTab === 'market' && (
@@ -283,7 +283,7 @@ export default function BlueprintDetail({ params }: { params: { id: string } }) 
           {activeTab === 'competitors' && (
             <div className="space-y-6">
               <h3 className="text-sm font-bold text-white uppercase tracking-wider">Top 5 Competitors & Positioning Map</h3>
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 {data.competitors?.map((comp: any, index: number) => (
                   <div key={index} className="rounded-xl border border-slate-850 bg-slate-950/30 p-4 flex flex-col justify-between">
                     <div>
@@ -426,7 +426,8 @@ export default function BlueprintDetail({ params }: { params: { id: string } }) 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-900/60">
                 <div className="space-y-3">
                   <h3 className="text-sm font-bold text-white uppercase tracking-wider">3-Year Projections</h3>
-                  <table className="w-full text-left text-xs border border-slate-900 rounded-lg overflow-hidden">
+                  <div className="table-responsive -mx-1 px-1">
+                    <table className="w-full text-left text-xs border border-slate-900 rounded-lg overflow-hidden min-w-[400px]">
                     <thead className="bg-slate-950 text-slate-400 text-[10px] uppercase font-bold tracking-wider">
                       <tr>
                         <th className="p-3">Year</th>
@@ -444,6 +445,7 @@ export default function BlueprintDetail({ params }: { params: { id: string } }) 
                       ))}
                     </tbody>
                   </table>
+                  </div>
                 </div>
 
                 <div className="space-y-2">

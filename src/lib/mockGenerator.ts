@@ -226,12 +226,12 @@ export function generateMockBlueprint(idea: string, industry?: string, geography
       },
       {
         name: 'Starter Plan',
-        price: '$29 / month',
+        price: '$99 / month',
         features: ['5 business blueprints per month', 'PDF export functionality', 'Detailed TAM/SAM/SOM breakdown', 'Priority customer support']
       },
       {
         name: 'Pro Unlimited',
-        price: '$99 / month',
+        price: '$299 / month',
         features: ['Unlimited business blueprints', 'High-priority lightning generation queue', 'PDF/CSV spreadsheet exports', 'API Access (beta)', 'Premium analytics dashboard']
       }
     ],
@@ -322,7 +322,7 @@ export function generateMockBlueprint(idea: string, industry?: string, geography
     {
       slide_no: 6,
       title: 'Business & Pricing Model',
-      talking_points: ['Freemium model: 1 free credit/month', 'Starter tier at $29/mo (5 credits)', 'Pro tier at $99/mo (unlimited generation, exports)'],
+      talking_points: ['Freemium model: 1 free credit/month', 'Starter tier at $99/mo (5 credits)', 'Pro tier at $299/mo (unlimited generation, exports)'],
       visual_recommendation: 'Simple 3-column pricing card layout highlighting Pro features'
     },
     {

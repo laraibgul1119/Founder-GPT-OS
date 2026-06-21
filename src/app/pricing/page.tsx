@@ -27,7 +27,7 @@ export default function Pricing() {
     {
       id: 'starter',
       name: 'Starter Plan',
-      price: '$29',
+      price: '$99',
       period: 'per month',
       desc: 'Best for founders validating 2-3 ideas/month.',
       features: [
@@ -44,7 +44,7 @@ export default function Pricing() {
     {
       id: 'pro',
       name: 'Pro Unlimited',
-      price: '$99',
+      price: '$299',
       period: 'per month',
       desc: 'Ideal for consultants, incubators, and builders.',
       features: [
@@ -93,9 +93,9 @@ export default function Pricing() {
       <Navigation />
 
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col justify-center">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <span className="text-[10px] uppercase font-bold tracking-wider text-cyan-400">Subscription Upgrades</span>
-          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl mt-1">
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white sm:text-4xl mt-1">
             Choose Your Blueprint Quota
           </h2>
           <p className="mt-4 text-sm text-slate-400">
@@ -103,13 +103,13 @@ export default function Pricing() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch max-w-4xl mx-auto w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch max-w-4xl mx-auto w-full overflow-hidden">
           {pricingTiers.map((tier) => (
             <div 
               key={tier.id}
-              className={`rounded-2xl p-6 glass flex flex-col justify-between relative transition-all duration-300 ${
+              className={`rounded-2xl p-5 sm:p-6 glass flex flex-col justify-between relative transition-all duration-300 ${
                 tier.highlighted 
-                  ? 'border-cyan-500 bg-cyan-950/10 shadow-cyan-950/10 shadow-lg scale-105 z-10' 
+                  ? 'border-cyan-500 bg-cyan-950/10 shadow-cyan-950/10 shadow-lg sm:scale-105 z-10' 
                   : 'border-slate-900 bg-slate-900/30'
               }`}
             >

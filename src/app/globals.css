@@ -12,12 +12,19 @@
   --card-bg: 30, 41, 59;           /* slate-800 (#1e293b) */
 }
 
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: radial-gradient(circle at 50% 50%, rgb(18, 18, 38) 0%, rgb(var(--background-rgb)) 100%);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Glassmorphism Classes */
@@ -45,6 +52,14 @@ body {
   transform: translateY(-4px);
   border-color: rgba(6, 182, 212, 0.4);
   box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.2);
+}
+
+@media (hover: none) {
+  .glow-card:active {
+    transform: translateY(-2px);
+    border-color: rgba(6, 182, 212, 0.4);
+    box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.2);
+  }
 }
 
 /* Pulsing Generation Animation */
@@ -82,6 +97,15 @@ body {
   background: rgba(255, 255, 255, 0.2);
 }
 
+/* Hide scrollbar utility */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 /* Interactive Tabs */
 .tab-active {
   color: rgb(var(--accent-cyan));
@@ -98,4 +122,31 @@ body {
 
 .gradient-bg {
   background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+}
+
+/* Touch-friendly tap targets */
+@media (pointer: coarse) {
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Responsive table wrapper */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Scroll fade indicator for horizontal scroll containers */
+.scroll-fade-right {
+  mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+}
+
+/* Safe area padding for notched devices */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }

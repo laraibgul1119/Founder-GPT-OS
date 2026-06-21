@@ -39,16 +39,16 @@ export function Modal({ isOpen, onClose, title, description, children, footer, s
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
       <div 
         className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
         onClick={onClose}
         aria-hidden="true"
       />
-      <div className={`relative w-full ${sizes[size]} bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden`}>
-        <div className="flex items-center justify-between border-b border-slate-800 p-6">
-          <div>
-            <h2 className="text-xl font-bold text-white">{title}</h2>
+      <div className={`relative w-full ${sizes[size]} max-w-[calc(100vw-2rem)] bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden`}>
+        <div className="flex items-center justify-between border-b border-slate-800 p-4 sm:p-6">
+          <div className="min-w-0">
+            <h2 className="text-lg sm:text-xl font-bold text-white">{title}</h2>
             {description && <p className="mt-1 text-sm text-slate-400">{description}</p>}
           </div>
           <button
@@ -59,11 +59,11 @@ export function Modal({ isOpen, onClose, title, description, children, footer, s
             <X className="h-5 w-5" />
           </button>
         </div>
-        <div className="p-6 max-h-[70vh] overflow-y-auto">
+        <div className="p-4 sm:p-6 max-h-[70vh] overflow-y-auto">
           {children}
         </div>
         {footer && (
-          <div className="flex items-center justify-end gap-3 border-t border-slate-800 p-6">
+          <div className="flex items-center justify-end gap-3 border-t border-slate-800 p-4 sm:p-6">
             {footer}
           </div>
         )}

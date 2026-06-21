@@ -180,14 +180,14 @@ function Settings() {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
-                      <div className="flex items-center justify-between py-3 border-b border-slate-800/50">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 border-b border-slate-800/50 gap-2">
                         <div className="flex items-center gap-2.5">
                           <Mail className="h-4 w-4 text-slate-500" />
                           <span className="text-sm text-slate-400">Email</span>
                         </div>
-                        <span className="text-sm text-white font-medium">{user?.email}</span>
+                        <span className="text-sm text-white font-medium break-all sm:break-normal">{user?.email}</span>
                       </div>
-                      <div className="flex items-center justify-between py-3 border-b border-slate-800/50">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 border-b border-slate-800/50 gap-2">
                         <div className="flex items-center gap-2.5">
                           <Calendar className="h-4 w-4 text-slate-500" />
                           <span className="text-sm text-slate-400">Member Since</span>
@@ -196,7 +196,7 @@ function Settings() {
                           {user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}
                         </span>
                       </div>
-                      <div className="flex items-center justify-between py-3 border-b border-slate-800/50">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 border-b border-slate-800/50 gap-2">
                         <div className="flex items-center gap-2.5">
                           <CheckCircle className="h-4 w-4 text-slate-500" />
                           <span className="text-sm text-slate-400">Last Login</span>
@@ -205,12 +205,12 @@ function Settings() {
                           {user?.lastLoginAt ? new Date(user.lastLoginAt).toLocaleDateString() : 'N/A'}
                         </span>
                       </div>
-                      <div className="flex items-center justify-between py-3">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 gap-2">
                         <div className="flex items-center gap-2.5">
                           <User className="h-4 w-4 text-slate-500" />
                           <span className="text-sm text-slate-400">User ID</span>
                         </div>
-                        <span className="text-xs text-slate-500 font-mono bg-slate-900 px-2 py-1 rounded">
+                        <span className="text-xs text-slate-500 font-mono bg-slate-900 px-2 py-1 rounded break-all sm:break-normal">
                           {user?.id?.slice(0, 12)}...
                         </span>
                       </div>

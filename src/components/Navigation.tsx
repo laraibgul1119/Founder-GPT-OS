@@ -3,13 +3,14 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LayoutDashboard, PlusCircle, CreditCard, LogOut, Briefcase, Settings } from 'lucide-react';
+import { LayoutDashboard, PlusCircle, CreditCard, LogOut, Briefcase, Settings, Menu, X } from 'lucide-react';
 
 export default function Navigation() {
   const pathname = usePathname();
   const router = useRouter();
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     async function fetchUser() {
@@ -26,6 +27,10 @@ export default function Navigation() {
       }
     }
     fetchUser();
+  }, [pathname]);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
   }, [pathname]);
 
   const handleLogout = async () => {
@@ -59,7 +64,7 @@ export default function Navigation() {
             </span>
           </Link>
           {user && (
-            <span className={`ml-3 rounded-full px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider ${
+            <span className={`ml-3 rounded-full px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider hidden sm:inline-block ${
               user.tier === 'pro' 
                 ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20' 
                 : user.tier === 'starter'
@@ -71,8 +76,8 @@ export default function Navigation() {
           )}
         </div>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-1">
+        {/* Desktop Navigation - visible on lg+ */}
+        <nav className="hidden lg:flex space-x-1">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href;
@@ -128,11 +133,20 @@ export default function Navigation() {
                   {user.firstName ? user.firstName[0] : user.email[0].toUpperCase()}
                 </Link>
                 
-                {/* Mock Sign Out / Switch User Option */}
+                {/* Hamburger Menu Button - visible on md/lg breakpoint */}
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="lg:hidden rounded-lg p-2 text-slate-400 hover:bg-slate-800 hover:text-white transition-colors"
+                  aria-label="Toggle navigation menu"
+                >
+                  {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                </button>
+
+                {/* Mock Sign Out / Switch User Option - hidden on mobile when hamburger is present */}
                 <button
                   onClick={handleLogout}
                   title="Sign Out"
-                  className="rounded-lg p-2 text-slate-400 hover:bg-slate-800 hover:text-red-400 transition-colors"
+                  className="hidden lg:block rounded-lg p-2 text-slate-400 hover:bg-slate-800 hover:text-red-400 transition-colors"
                 >
                   <LogOut className="h-4 w-4" />
                 </button>
@@ -142,8 +156,43 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/* Mobile Navigation Bar */}
-      <div className="flex md:hidden border-t border-slate-800/40 bg-slate-900/90 py-2 justify-around">
+      {/* Hamburger Dropdown Menu - for tablets (md to lg) */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden border-t border-slate-800/40 bg-slate-900/95 backdrop-blur-xl">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 py-3 space-y-1">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-all ${
+                    isActive
+                      ? 'bg-slate-800 text-cyan-400 border border-slate-700/50'
+                      : 'text-slate-300 hover:bg-slate-800/60 hover:text-white'
+                  }`}
+                >
+                  <Icon className="h-4 w-4" />
+                  {item.name}
+                </Link>
+              );
+            })}
+            <div className="border-t border-slate-800/40 pt-2 mt-2">
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-3 w-full rounded-lg px-4 py-3 text-sm font-medium text-red-400 hover:bg-red-500/10 transition-colors"
+              >
+                <LogOut className="h-4 w-4" />
+                Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Bottom Navigation Bar - visible only on small screens */}
+      <div className="flex md:hidden border-t border-slate-800/40 bg-slate-900/90 py-2 justify-around pb-safe">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;
@@ -151,12 +200,12 @@ export default function Navigation() {
             <Link
               key={item.name}
               href={item.href}
-              className={`flex flex-col items-center gap-0.5 px-3 py-1 text-xs font-medium transition-colors ${
+              className={`flex flex-col items-center gap-0.5 px-3 py-1 text-xs font-medium transition-colors min-w-[60px] ${
                 isActive ? 'text-cyan-400 font-semibold' : 'text-slate-400 hover:text-white'
               }`}
             >
-              <Icon className="h-4 w-4" />
-              <span>{item.name.split(' ')[0]}</span>
+              <Icon className="h-5 w-5" />
+              <span className="text-[10px]">{item.name.split(' ')[0]}</span>
             </Link>
           );
         })}

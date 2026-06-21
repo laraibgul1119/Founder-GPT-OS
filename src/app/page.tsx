@@ -74,7 +74,7 @@ export default function LandingPage() {
     },
     {
       name: 'Starter Plan',
-      price: '$29',
+      price: '$99',
       period: 'per month',
       desc: 'Perfect for serial builders validating multiple projects.',
       features: [
@@ -90,7 +90,7 @@ export default function LandingPage() {
     },
     {
       name: 'Pro Unlimited',
-      price: '$99',
+      price: '$299',
       period: 'per month',
       desc: 'For power entrepreneurs, incubators, and consultants.',
       features: [
@@ -146,22 +146,22 @@ export default function LandingPage() {
       </header>
 
       {/* Hero Section */}
-      <section className="mx-auto max-w-7xl px-4 pt-20 pb-16 text-center sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-7xl px-4 pt-16 sm:pt-20 pb-12 sm:pb-16 text-center sm:px-6 lg:px-8">
         <div className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/20 bg-cyan-500/5 px-3 py-1 text-xs font-semibold text-cyan-400 shadow-inner mb-6">
           <Sparkles className="h-3.5 w-3.5" />
           <span>Llama 3.3 70B AI Business Consultant Live</span>
         </div>
 
-        <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl max-w-4xl mx-auto leading-none">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-none">
           Your AI Co-Founder Awaits. Build a{' '}
           <span className="gradient-text">Business Plan in 2 Minutes.</span>
         </h1>
 
-        <p className="mt-6 text-lg text-slate-400 max-w-2xl mx-auto">
+        <p className="mt-6 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto px-2">
           Transform a single startup idea sentence into an investor-ready, 8-section business blueprint. Skip weeks of manual competitor and financial research.
         </p>
 
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
           <Link
             href="/sign-up"
             className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl gradient-bg px-8 py-4 text-base font-bold text-white shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
@@ -178,39 +178,39 @@ export default function LandingPage() {
         </div>
 
         {/* Dashboard Preview Graphic */}
-        <div className="mt-16 rounded-2xl border border-slate-800/80 bg-slate-900/60 p-2 shadow-2xl glass max-w-5xl mx-auto">
-          <div className="rounded-xl border border-slate-800 bg-slate-950 p-6 text-left">
-            <div className="flex items-center justify-between border-b border-slate-900 pb-4 mb-6">
-              <div className="flex items-center gap-2">
-                <div className="h-3 w-3 rounded-full bg-red-500/80" />
-                <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
-                <div className="h-3 w-3 rounded-full bg-green-500/80" />
-                <span className="ml-2 text-xs font-mono text-slate-500">foundergpt-os.vercel.app/blueprint/example-id</span>
+        <div className="mt-12 sm:mt-16 rounded-2xl border border-slate-800/80 bg-slate-900/60 p-2 shadow-2xl glass max-w-5xl mx-auto overflow-hidden">
+          <div className="rounded-xl border border-slate-800 bg-slate-950 p-4 sm:p-6 text-left">
+            <div className="flex items-center justify-between border-b border-slate-900 pb-4 mb-6 gap-2">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="h-3 w-3 rounded-full bg-red-500/80 shrink-0" />
+                <div className="h-3 w-3 rounded-full bg-yellow-500/80 shrink-0" />
+                <div className="h-3 w-3 rounded-full bg-green-500/80 shrink-0" />
+                <span className="ml-2 text-xs font-mono text-slate-500 truncate">foundergpt-os.vercel.app/blueprint/example-id</span>
               </div>
-              <div className="flex items-center gap-2 text-xs text-slate-400 bg-slate-900/60 rounded px-2 py-1 font-mono">
+              <div className="hidden sm:flex items-center gap-2 text-xs text-slate-400 bg-slate-900/60 rounded px-2 py-1 font-mono shrink-0">
                 Model: llama-3.3-70b-versatile
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="rounded-lg border border-slate-800/50 bg-slate-900/40 p-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+              <div className="rounded-lg border border-slate-800/50 bg-slate-900/40 p-3 sm:p-4">
                 <div className="text-[10px] uppercase font-bold tracking-wider text-cyan-400 mb-1">Total Addressable Market</div>
-                <div className="text-2xl font-extrabold text-white">$15.2 Billion</div>
+                <div className="text-xl sm:text-2xl font-extrabold text-white">$15.2 Billion</div>
                 <div className="text-xs text-slate-400 mt-1">SAM: $1.2B | SOM: $60M</div>
               </div>
-              <div className="rounded-lg border border-slate-800/50 bg-slate-900/40 p-4">
+              <div className="rounded-lg border border-slate-800/50 bg-slate-900/40 p-3 sm:p-4">
                 <div className="text-[10px] uppercase font-bold tracking-wider text-emerald-400 mb-1">Annual Revenue Growth</div>
-                <div className="text-2xl font-extrabold text-white">18.5% YoY</div>
+                <div className="text-xl sm:text-2xl font-extrabold text-white">18.5% YoY</div>
                 <div className="text-xs text-slate-400 mt-1">HealthTech Sector projections</div>
               </div>
-              <div className="rounded-lg border border-slate-800/50 bg-slate-900/40 p-4">
+              <div className="rounded-lg border border-slate-800/50 bg-slate-900/40 p-3 sm:p-4 sm:col-span-2 md:col-span-1">
                 <div className="text-[10px] uppercase font-bold tracking-wider text-amber-400 mb-1">Competition Intensity</div>
-                <div className="text-2xl font-extrabold text-white">Medium-High</div>
+                <div className="text-xl sm:text-2xl font-extrabold text-white">Medium-High</div>
                 <div className="text-xs text-slate-400 mt-1">5 direct competitors mapped</div>
               </div>
             </div>
             
-            <div className="mt-4 border border-dashed border-slate-800 rounded-lg p-4 bg-slate-900/20 text-xs text-slate-400 leading-relaxed">
+            <div className="mt-4 border border-dashed border-slate-800 rounded-lg p-3 sm:p-4 bg-slate-900/20 text-xs text-slate-400 leading-relaxed">
               <strong>Executive Summary:</strong> The platform helps modern busy professionals organize their meal preparation and grocery selections automatically. Driven by cost-of-living adjustments and health awareness trends, this product provides customized recipes in under 5 seconds, capturing a significant SOM in the US market...
             </div>
           </div>
@@ -218,13 +218,13 @@ export default function LandingPage() {
       </section>
 
       {/* Value Proposition Grid */}
-      <section id="features" className="py-24 border-t border-slate-900 bg-slate-900/10">
+      <section id="features" className="py-16 sm:py-24 border-t border-slate-900 bg-slate-900/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Complete Business Planning, Done Instantly
             </h2>
-            <p className="mt-4 text-base text-slate-400">
+            <p className="mt-4 text-sm sm:text-base text-slate-400">
               FounderGPT OS generates data-backed structures for every aspect of your new startup idea.
             </p>
           </div>
@@ -250,18 +250,18 @@ export default function LandingPage() {
       </section>
 
       {/* User Personas Target Testimonials */}
-      <section className="py-24 border-t border-slate-900 relative">
+      <section className="py-16 sm:py-24 border-t border-slate-900 relative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Loved by Thousands of Entrepreneurs
             </h2>
-            <p className="mt-4 text-base text-slate-400">
+            <p className="mt-4 text-sm sm:text-base text-slate-400">
               See how modern founders leverage FounderGPT OS to quickly validate, research, and launch.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             <div className="rounded-2xl border border-slate-800/80 bg-slate-900/30 p-6 glass flex flex-col justify-between">
               <p className="text-sm text-slate-300 italic leading-relaxed">
                 "As a software engineer, I had a dozen ideas but zero business background. FounderGPT OS gave me a complete, detailed roadmap, persona profiles, and pricing ideas in 2 minutes. We just raised our pre-seed!"
@@ -305,24 +305,24 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-24 border-t border-slate-900 bg-slate-900/5">
+      <section className="py-16 sm:py-24 border-t border-slate-900 bg-slate-900/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Simple, Transparent Pricing
             </h2>
-            <p className="mt-4 text-base text-slate-400">
+            <p className="mt-4 text-sm sm:text-base text-slate-400">
               Choose the tier that matches your validation frequency. Upgrade or downgrade anytime.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto overflow-hidden">
             {pricingTiers.map((tier) => (
               <div 
                 key={tier.name}
-                className={`rounded-2xl p-6 glass relative flex flex-col justify-between ${
+                className={`rounded-2xl p-5 sm:p-6 glass relative flex flex-col justify-between ${
                   tier.highlighted 
-                    ? 'border-cyan-500 bg-cyan-950/10 shadow-cyan-950/10 shadow-lg scale-105 z-10' 
+                    ? 'border-cyan-500 bg-cyan-950/10 shadow-cyan-950/10 shadow-lg sm:scale-105 z-10' 
                     : 'border-slate-800 bg-slate-900/30'
                 }`}
               >

@@ -119,9 +119,9 @@ function Dashboard() {
         
         {/* Upgrade alert modal banner */}
         {showUpgradeAlert && (
-          <div className="mb-6 rounded-xl border border-cyan-500/30 bg-cyan-950/20 p-4 pulse-glow text-cyan-400 flex items-center justify-between">
+          <div className="mb-6 rounded-xl border border-cyan-500/30 bg-cyan-950/20 p-3 sm:p-4 pulse-glow text-cyan-400 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div className="flex items-center gap-2.5">
-              <Sparkles className="h-5 w-5 text-cyan-400" />
+              <Sparkles className="h-5 w-5 text-cyan-400 shrink-0" />
               <div>
                 <h4 className="font-bold text-white uppercase tracking-wider text-sm">Subscription Upgraded Successfully!</h4>
                 <p className="text-xs text-slate-300 mt-0.5">Your account has been upgraded to the <strong className="text-cyan-400 capitalize">{upgradedPlan}</strong> plan. Enjoy your elevated generation quota.</p>
@@ -129,7 +129,7 @@ function Dashboard() {
             </div>
             <button 
               onClick={() => setShowUpgradeAlert(false)}
-              className="text-slate-400 hover:text-white text-xs font-semibold px-3 py-1.5 rounded-lg hover:bg-slate-800 transition-colors"
+              className="text-slate-400 hover:text-white text-xs font-semibold px-3 py-1.5 rounded-lg hover:bg-slate-800 transition-colors shrink-0"
             >
               Dismiss
             </button>
@@ -165,7 +165,7 @@ function Dashboard() {
         ) : (
           <div className="space-y-8">
             {/* Quick Stats Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               <div className="rounded-xl border border-slate-900 bg-slate-900/40 p-5 glass">
                 <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Monthly Usage limit</span>
                 <div className="flex items-baseline gap-1.5 mt-2">
@@ -241,7 +241,7 @@ function Dashboard() {
                   </Link>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                   {blueprints.map((bp) => {
                     const marketSize = bp.tam;
                     return (
