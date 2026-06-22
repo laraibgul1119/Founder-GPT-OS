@@ -150,10 +150,15 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Scroll fade indicator for horizontal scroll containers */
+/* Scroll fade indicators for horizontal scroll containers */
 .scroll-fade-right {
   mask-image: linear-gradient(to right, black 85%, transparent 100%);
   -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+}
+
+.scroll-fade-both {
+  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 92%, transparent 100%);
 }
 
 /* Safe area padding for notched devices */

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import {
@@ -18,6 +18,7 @@ import {
   CheckCircle2,
   Info,
   ArrowLeft,
+  ChevronDown,
   Loader2,
   Mail,
   Link as LinkIcon,
@@ -35,6 +36,8 @@ export default function BlueprintDetail({ params }: { params: { id: string } }) 
   const [activeTab, setActiveTab] = useState('market');
   const [copiedLink, setCopiedLink] = useState(false);
   const [exporting, setExporting] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -64,6 +67,22 @@ export default function BlueprintDetail({ params }: { params: { id: string } }) 
     }
     fetchData();
   }, [id, router]);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setMobileMenuOpen(false);
+      }
+    }
+    if (mobileMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [activeTab]);
 
   const handleShare = () => {
     const url = `${window.location.origin}/blueprint/${id}`;
@@ -201,26 +220,82 @@ export default function BlueprintDetail({ params }: { params: { id: string } }) 
         </div>
 
         {/* Tab Navigation Menu */}
-        <div className="flex overflow-x-auto gap-0.5 sm:gap-1 border-b border-slate-900 pb-px scrollbar-none scroll-fade-right -mx-1 px-1">
-          {tabs.map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-1 sm:gap-1.5 rounded-t-xl px-3 sm:px-4 py-3 text-[10px] sm:text-xs font-semibold transition-all whitespace-nowrap border-b-2 min-h-[44px] ${
-                  isActive
-                    ? 'border-cyan-400 text-cyan-400 bg-cyan-950/10'
-                    : 'border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-900/50'
+        <div ref={menuRef}>
+          {/* Mobile: Dropdown selector (< 768px) */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="flex items-center justify-between w-full gap-2 rounded-xl border border-slate-800 bg-slate-900/60 px-4 py-3.5 text-sm font-semibold text-white transition-colors hover:border-slate-700 min-h-[48px]"
+              aria-expanded={mobileMenuOpen}
+              aria-haspopup="listbox"
+            >
+              <span className="flex items-center gap-2.5 min-w-0">
+                {(() => {
+                  const ActiveIcon = tabs.find((t) => t.id === activeTab)?.icon;
+                  return ActiveIcon ? <ActiveIcon className="h-4 w-4 shrink-0 text-cyan-400" /> : null;
+                })()}
+                <span className="truncate">{tabs.find((t) => t.id === activeTab)?.name}</span>
+              </span>
+              <ChevronDown
+                className={`h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 ${
+                  mobileMenuOpen ? 'rotate-180' : ''
                 }`}
+              />
+            </button>
+
+            {mobileMenuOpen && (
+              <div
+                className="mt-1.5 rounded-xl border border-slate-800 bg-slate-900/95 backdrop-blur-xl shadow-xl overflow-hidden max-h-[60vh] overflow-y-auto"
+                role="listbox"
               >
-                <Icon className="h-3.5 w-3.5 shrink-0" />
-                <span className="hidden xs:inline">{tab.name}</span>
-                <span className="xs:hidden">{tab.name.split(' ')[0]}</span>
-              </button>
-            );
-          })}
+                {tabs.map((tab) => {
+                  const Icon = tab.icon;
+                  const isActive = activeTab === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => {
+                        setActiveTab(tab.id);
+                        setMobileMenuOpen(false);
+                      }}
+                      role="option"
+                      aria-selected={isActive}
+                      className={`flex items-center gap-3 w-full px-4 py-3.5 text-sm font-medium transition-colors min-h-[48px] ${
+                        isActive
+                          ? 'bg-cyan-950/20 text-cyan-400 border-l-2 border-cyan-400'
+                          : 'text-slate-300 hover:bg-slate-800/60 hover:text-white border-l-2 border-transparent'
+                      }`}
+                    >
+                      <Icon className="h-4 w-4 shrink-0" />
+                      <span>{tab.name}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* Desktop: Horizontal tabs (>= 768px) */}
+          <div className="hidden md:flex overflow-x-auto gap-1 border-b border-slate-900 pb-px scrollbar-none scroll-fade-both">
+            {tabs.map((tab) => {
+              const Icon = tab.icon;
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center gap-2 rounded-t-xl px-4 lg:px-5 py-3 text-sm font-semibold transition-all whitespace-nowrap border-b-2 min-h-[44px] ${
+                    isActive
+                      ? 'border-cyan-400 text-cyan-400 bg-cyan-950/10'
+                      : 'border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-900/50'
+                  }`}
+                >
+                  <Icon className="h-4 w-4 shrink-0" />
+                  {tab.name}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Tab Contents panel */}

@@ -123,6 +123,15 @@ function Settings() {
           <>
             <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} className="mb-6 sm:mb-8" />
 
+            {/* Mobile: active tab label shown below dropdown for context */}
+            <div className="md:hidden mb-4">
+              <p className="text-xs text-slate-500 leading-relaxed">
+                {activeTab === 'profile' && 'Update your name, email, and personal details.'}
+                {activeTab === 'subscription' && 'View your current plan and monthly usage.'}
+                {activeTab === 'danger' && 'Manage account deletion and sign out.'}
+              </p>
+            </div>
+
             {/* Profile Tab */}
             {activeTab === 'profile' && (
               <div className="space-y-5 sm:space-y-6">
