@@ -3,12 +3,12 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Navigation from '@/components/Navigation';
-import { 
-  Sparkles, 
-  ArrowLeft, 
-  Globe, 
-  Briefcase, 
-  DollarSign, 
+import {
+  Sparkles,
+  ArrowLeft,
+  Globe,
+  Briefcase,
+  DollarSign,
   Lightbulb,
   TrendingUp,
   Search,
@@ -20,19 +20,16 @@ import {
 
 export default function GenerateBlueprint() {
   const router = useRouter();
-  
-  // Form values
+
   const [startupIdea, setStartupIdea] = useState('');
   const [industry, setIndustry] = useState('SaaS');
   const [targetGeography, setTargetGeography] = useState('Global');
   const [estimatedMarketSize, setEstimatedMarketSize] = useState('');
 
-  // Generation status
   const [isGenerating, setIsGenerating] = useState(false);
   const [loadingStep, setLoadingStep] = useState(0);
   const [errorAlert, setErrorAlert] = useState<string | null>(null);
-  
-  // Check user limit first
+
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
@@ -50,7 +47,6 @@ export default function GenerateBlueprint() {
     fetchUser();
   }, []);
 
-  // Cycle through loading steps to provide feedback on what the LLM is doing
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isGenerating) {
@@ -119,41 +115,38 @@ export default function GenerateBlueprint() {
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
       <Navigation />
 
-      <main className="flex-1 max-w-3xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col justify-center">
-        
+      <main className="flex-1 max-w-3xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex flex-col justify-center">
+
         {isGenerating ? (
-          /* Animated loading page interface */
-          <div className="rounded-2xl border border-slate-900 bg-slate-900/20 p-10 text-center glass pulse-glow max-w-xl mx-auto w-full my-8">
-            <div className="relative h-16 w-16 mx-auto mb-6 flex items-center justify-center">
-              <Loader2 className="h-12 w-12 text-cyan-500 animate-spin absolute" />
-              <Sparkles className="h-5 w-5 text-cyan-400 animate-pulse" />
+          <div className="rounded-2xl border border-slate-900 bg-slate-900/20 p-6 sm:p-8 md:p-10 text-center glass pulse-glow max-w-xl mx-auto w-full my-6 sm:my-8">
+            <div className="relative h-14 w-14 sm:h-16 sm:w-16 mx-auto mb-5 sm:mb-6 flex items-center justify-center">
+              <Loader2 className="h-10 w-10 sm:h-12 sm:w-12 text-cyan-500 animate-spin absolute" />
+              <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-cyan-400 animate-pulse" />
             </div>
 
-            <h3 className="text-xl font-bold text-white mb-2">Generating Business Blueprint</h3>
-            <p className="text-xs text-slate-400 max-w-md mx-auto mb-8">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Generating Business Blueprint</h3>
+            <p className="text-[10px] sm:text-xs text-slate-400 max-w-md mx-auto mb-6 sm:mb-8 leading-relaxed">
               FounderGPT is processing your idea using advanced models. This usually takes 10-15 seconds.
             </p>
 
-            {/* Current Loading Step */}
-            <div className="bg-slate-950/80 rounded-xl border border-slate-900 p-5 text-left flex gap-4 items-center">
-              <div className="h-10 w-10 rounded-lg gradient-bg flex items-center justify-center text-white shrink-0 shadow-md">
-                {React.createElement(loadingPhases[loadingStep].icon, { className: 'h-5 w-5' })}
+            <div className="bg-slate-950/80 rounded-xl border border-slate-900 p-4 sm:p-5 text-left flex gap-3 sm:gap-4 items-center">
+              <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-lg gradient-bg flex items-center justify-center text-white shrink-0 shadow-md">
+                {React.createElement(loadingPhases[loadingStep].icon, { className: 'h-4 w-4 sm:h-5 sm:w-5' })}
               </div>
-              <div>
-                <h4 className="text-sm font-bold text-white">
+              <div className="min-w-0">
+                <h4 className="text-xs sm:text-sm font-bold text-white">
                   {loadingPhases[loadingStep].title}
                 </h4>
-                <p className="text-[11px] text-slate-400 mt-0.5 leading-normal">
+                <p className="text-[10px] sm:text-[11px] text-slate-400 mt-0.5 leading-normal">
                   {loadingPhases[loadingStep].desc}
                 </p>
               </div>
             </div>
 
-            {/* Micro progress dots indicator */}
-            <div className="mt-8 flex justify-center gap-2">
+            <div className="mt-6 sm:mt-8 flex justify-center gap-2">
               {loadingPhases.map((_, index) => (
-                <div 
-                  key={index} 
+                <div
+                  key={index}
                   className={`h-2 rounded-full transition-all duration-300 ${
                     index === loadingStep ? 'w-6 gradient-bg' : index < loadingStep ? 'w-2 bg-cyan-600' : 'w-2 bg-slate-800'
                   }`}
@@ -162,38 +155,36 @@ export default function GenerateBlueprint() {
             </div>
           </div>
         ) : (
-          /* Form interface */
-          <div className="space-y-6">
-            
+          <div className="space-y-5 sm:space-y-6">
+
             <div className="flex items-center gap-2">
-              <button 
+              <button
                 onClick={() => router.back()}
-                className="flex items-center justify-center p-2 rounded-lg text-slate-400 hover:bg-slate-900 hover:text-white transition-colors"
+                className="flex items-center justify-center p-2.5 rounded-lg text-slate-400 hover:bg-slate-900 hover:text-white transition-colors min-h-[44px] min-w-[44px]"
               >
                 <ArrowLeft className="h-4 w-4" />
               </button>
               <div>
                 <span className="text-[10px] uppercase font-bold tracking-wider text-cyan-400">Step 1 of 2</span>
-                <h2 className="text-xl font-bold text-white">Generate Startup Blueprint</h2>
+                <h2 className="text-lg sm:text-xl font-bold text-white">Generate Startup Blueprint</h2>
               </div>
             </div>
 
             {errorAlert && (
-              <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-4 text-red-400 flex items-start gap-2.5 text-xs">
+              <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-3 sm:p-4 text-red-400 flex items-start gap-2.5 text-xs">
                 <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
-                <div>
+                <div className="min-w-0">
                   <h4 className="font-bold">Generation Blocked</h4>
                   <p className="mt-0.5 leading-relaxed">{errorAlert}</p>
                 </div>
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-5 rounded-2xl border border-slate-900 bg-slate-900/30 p-6 glass">
-              
-              {/* Idea Textarea */}
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 rounded-2xl border border-slate-900 bg-slate-900/30 p-4 sm:p-5 md:p-6 glass">
+
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-300 flex items-center gap-1">
-                  <Lightbulb className="h-3.5 w-3.5 text-yellow-500" />
+                  <Lightbulb className="h-3.5 w-3.5 text-yellow-500 shrink-0" />
                   Describe Your Startup Idea
                 </label>
                 <textarea
@@ -202,24 +193,23 @@ export default function GenerateBlueprint() {
                   placeholder="e.g. A marketplace connecting freelance video editors with YouTubers, specializing in quick 24-hour turnaround edits."
                   rows={4}
                   required
-                  className="w-full rounded-xl border border-slate-800 bg-slate-950 p-3 text-sm text-slate-200 placeholder-slate-600 focus:border-cyan-500 focus:outline-none transition-colors"
+                  className="w-full rounded-xl border border-slate-800 bg-slate-950 p-3 text-sm text-slate-200 placeholder-slate-600 focus:border-cyan-500 focus:outline-none transition-colors min-h-[100px]"
                 />
                 <p className="text-[10px] text-slate-500 leading-normal">
                   Describe what your startup does, who it is for, and your core value proposition in 1-2 sentences.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {/* Industry Selection */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-slate-300 flex items-center gap-1">
-                    <Briefcase className="h-3.5 w-3.5 text-slate-400" />
+                    <Briefcase className="h-3.5 w-3.5 text-slate-400 shrink-0" />
                     Industry Category
                   </label>
                   <select
                     value={industry}
                     onChange={(e) => setIndustry(e.target.value)}
-                    className="w-full rounded-xl border border-slate-800 bg-slate-950 p-3 text-sm text-slate-200 focus:border-cyan-500 focus:outline-none transition-colors"
+                    className="w-full rounded-xl border border-slate-800 bg-slate-950 p-3 text-sm text-slate-200 focus:border-cyan-500 focus:outline-none transition-colors min-h-[48px]"
                   >
                     <option value="SaaS">SaaS / Software</option>
                     <option value="FinTech">FinTech / Finance</option>
@@ -231,16 +221,15 @@ export default function GenerateBlueprint() {
                   </select>
                 </div>
 
-                {/* Target Geography */}
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-slate-300 flex items-center gap-1">
-                    <Globe className="h-3.5 w-3.5 text-slate-400" />
+                    <Globe className="h-3.5 w-3.5 text-slate-400 shrink-0" />
                     Target Geography
                   </label>
                   <select
                     value={targetGeography}
                     onChange={(e) => setTargetGeography(e.target.value)}
-                    className="w-full rounded-xl border border-slate-800 bg-slate-950 p-3 text-sm text-slate-200 focus:border-cyan-500 focus:outline-none transition-colors"
+                    className="w-full rounded-xl border border-slate-800 bg-slate-950 p-3 text-sm text-slate-200 focus:border-cyan-500 focus:outline-none transition-colors min-h-[48px]"
                   >
                     <option value="US / Canada">North America (US & Canada)</option>
                     <option value="Europe">Europe / United Kingdom</option>
@@ -250,10 +239,9 @@ export default function GenerateBlueprint() {
                 </div>
               </div>
 
-              {/* Estimated Market Size (Optional) */}
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-300 flex items-center gap-1">
-                  <DollarSign className="h-3.5 w-3.5 text-slate-400" />
+                  <DollarSign className="h-3.5 w-3.5 text-slate-400 shrink-0" />
                   Estimated Market Size (Optional, in Millions $)
                 </label>
                 <input
@@ -261,19 +249,18 @@ export default function GenerateBlueprint() {
                   value={estimatedMarketSize}
                   onChange={(e) => setEstimatedMarketSize(e.target.value)}
                   placeholder="e.g. 5000 (for $5 Billion)"
-                  className="w-full rounded-xl border border-slate-800 bg-slate-950 p-3 text-sm text-slate-200 placeholder-slate-700 focus:border-cyan-500 focus:outline-none transition-colors"
+                  className="w-full rounded-xl border border-slate-800 bg-slate-950 p-3 text-sm text-slate-200 placeholder-slate-700 focus:border-cyan-500 focus:outline-none transition-colors min-h-[48px]"
                 />
-                <p className="text-[10px] text-slate-500">
+                <p className="text-[10px] text-slate-500 leading-normal">
                   Optional. If left blank, the AI will research and supply realistic market sizing numbers based on your category.
                 </p>
               </div>
 
-              {/* Submit CTA */}
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 rounded-xl gradient-bg py-4 text-sm font-bold text-white shadow-xl hover:brightness-115 active:scale-[0.99] transition-all duration-200"
+                className="w-full flex items-center justify-center gap-2 rounded-xl gradient-bg py-4 text-sm font-bold text-white shadow-xl hover:brightness-115 active:scale-[0.99] transition-all duration-200 min-h-[48px]"
               >
-                <Sparkles className="h-4 w-4 text-white" />
+                <Sparkles className="h-4 w-4 text-white shrink-0" />
                 Generate AI Business Plan
               </button>
 

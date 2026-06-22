@@ -42,14 +42,12 @@ function Settings() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('profile');
 
-  // Profile form state
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
-  // Danger zone
   const [confirmDelete, setConfirmDelete] = useState(false);
 
   useEffect(() => {
@@ -107,27 +105,27 @@ function Settings() {
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
       <Navigation />
 
-      <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Header */}
-        <div className="border-b border-slate-900 pb-6 mb-8">
-          <h1 className="text-2xl font-bold text-white sm:text-3xl">Settings</h1>
-          <p className="text-sm text-slate-400 mt-1">
+        <div className="border-b border-slate-900 pb-5 sm:pb-6 mb-6 sm:mb-8">
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">Settings</h1>
+          <p className="text-xs sm:text-sm text-slate-400 mt-1 leading-relaxed">
             Manage your account, profile, and subscription preferences.
           </p>
         </div>
 
         {loading ? (
-          <div className="flex flex-col items-center justify-center py-20 gap-3">
+          <div className="flex flex-col items-center justify-center py-16 sm:py-20 gap-3">
             <Loader2 className="h-8 w-8 text-cyan-500 animate-spin" />
             <p className="text-sm text-slate-400">Loading settings...</p>
           </div>
         ) : (
           <>
-            <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} className="mb-8" />
+            <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} className="mb-6 sm:mb-8" />
 
             {/* Profile Tab */}
             {activeTab === 'profile' && (
-              <div className="space-y-6">
+              <div className="space-y-5 sm:space-y-6">
                 {saveMessage && (
                   <Alert variant={saveMessage.type === 'success' ? 'success' : 'error'}>
                     {saveMessage.text}
@@ -140,7 +138,7 @@ function Settings() {
                     <CardDescription>Update your name and profile details.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                       <Input
                         label="First Name"
                         value={firstName}
@@ -155,7 +153,7 @@ function Settings() {
                       />
                     </div>
 
-                    <div className="mt-5">
+                    <div className="mt-4 sm:mt-5">
                       <Input
                         label="Email Address"
                         value={email}
@@ -164,7 +162,7 @@ function Settings() {
                       />
                     </div>
 
-                    <div className="mt-6 flex items-center gap-3">
+                    <div className="mt-5 sm:mt-6 flex items-center gap-3">
                       <Button onClick={handleSaveProfile} loading={saving} size="sm">
                         <Save className="h-4 w-4 mr-1.5" />
                         Save Changes
@@ -179,38 +177,38 @@ function Settings() {
                     <CardDescription>Read-only account information.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-4">
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 border-b border-slate-800/50 gap-2">
+                    <div className="space-y-3 sm:space-y-4">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 border-b border-slate-800/50 gap-1.5 sm:gap-2">
                         <div className="flex items-center gap-2.5">
-                          <Mail className="h-4 w-4 text-slate-500" />
-                          <span className="text-sm text-slate-400">Email</span>
+                          <Mail className="h-4 w-4 text-slate-500 shrink-0" />
+                          <span className="text-xs sm:text-sm text-slate-400">Email</span>
                         </div>
-                        <span className="text-sm text-white font-medium break-all sm:break-normal">{user?.email}</span>
+                        <span className="text-xs sm:text-sm text-white font-medium break-all sm:break-normal">{user?.email}</span>
                       </div>
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 border-b border-slate-800/50 gap-2">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 border-b border-slate-800/50 gap-1.5 sm:gap-2">
                         <div className="flex items-center gap-2.5">
-                          <Calendar className="h-4 w-4 text-slate-500" />
-                          <span className="text-sm text-slate-400">Member Since</span>
+                          <Calendar className="h-4 w-4 text-slate-500 shrink-0" />
+                          <span className="text-xs sm:text-sm text-slate-400">Member Since</span>
                         </div>
-                        <span className="text-sm text-white font-medium">
+                        <span className="text-xs sm:text-sm text-white font-medium">
                           {user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}
                         </span>
                       </div>
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 border-b border-slate-800/50 gap-2">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 border-b border-slate-800/50 gap-1.5 sm:gap-2">
                         <div className="flex items-center gap-2.5">
-                          <CheckCircle className="h-4 w-4 text-slate-500" />
-                          <span className="text-sm text-slate-400">Last Login</span>
+                          <CheckCircle className="h-4 w-4 text-slate-500 shrink-0" />
+                          <span className="text-xs sm:text-sm text-slate-400">Last Login</span>
                         </div>
-                        <span className="text-sm text-white font-medium">
+                        <span className="text-xs sm:text-sm text-white font-medium">
                           {user?.lastLoginAt ? new Date(user.lastLoginAt).toLocaleDateString() : 'N/A'}
                         </span>
                       </div>
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 gap-2">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 gap-1.5 sm:gap-2">
                         <div className="flex items-center gap-2.5">
-                          <User className="h-4 w-4 text-slate-500" />
-                          <span className="text-sm text-slate-400">User ID</span>
+                          <User className="h-4 w-4 text-slate-500 shrink-0" />
+                          <span className="text-xs sm:text-sm text-slate-400">User ID</span>
                         </div>
-                        <span className="text-xs text-slate-500 font-mono bg-slate-900 px-2 py-1 rounded break-all sm:break-normal">
+                        <span className="text-[10px] sm:text-xs text-slate-500 font-mono bg-slate-900 px-2 py-1 rounded break-all sm:break-normal">
                           {user?.id?.slice(0, 12)}...
                         </span>
                       </div>
@@ -222,7 +220,7 @@ function Settings() {
 
             {/* Subscription Tab */}
             {activeTab === 'subscription' && (
-              <div className="space-y-6">
+              <div className="space-y-5 sm:space-y-6">
                 <Card>
                   <CardHeader>
                     <CardTitle>Current Plan</CardTitle>
@@ -231,14 +229,14 @@ function Settings() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-5">
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4 sm:p-5">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
                         <div>
                           <div className="flex items-center gap-2">
-                            <span className="text-2xl font-extrabold text-white capitalize">
+                            <span className="text-xl sm:text-2xl font-extrabold text-white capitalize">
                               {user?.tier || 'free'}
                             </span>
-                            <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider ${
+                            <span className={`rounded-full px-2 sm:px-2.5 py-0.5 text-[10px] sm:text-xs font-semibold uppercase tracking-wider ${
                               user?.tier === 'pro'
                                 ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'
                                 : user?.tier === 'starter'
@@ -248,7 +246,7 @@ function Settings() {
                               Active
                             </span>
                           </div>
-                          <p className="text-sm text-slate-400 mt-1">
+                          <p className="text-xs sm:text-sm text-slate-400 mt-1 leading-relaxed">
                             {user?.tier === 'free'
                               ? 'Basic access with limited blueprint generations.'
                               : user?.tier === 'starter'
@@ -265,19 +263,18 @@ function Settings() {
                       </div>
                     </div>
 
-                    {/* Usage */}
-                    <div className="mt-6 space-y-4">
+                    <div className="mt-5 sm:mt-6 space-y-3 sm:space-y-4">
                       <h4 className="text-sm font-bold text-white">Monthly Usage</h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="rounded-xl border border-slate-800 bg-slate-900/30 p-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                        <div className="rounded-xl border border-slate-800 bg-slate-900/30 p-3.5 sm:p-4">
                           <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400">
                             Blueprints Used
                           </span>
                           <div className="flex items-baseline gap-1.5 mt-2">
-                            <span className="text-3xl font-extrabold text-white">
+                            <span className="text-2xl sm:text-3xl font-extrabold text-white">
                               {user?.blueprintsUsedThisMonth || 0}
                             </span>
-                            <span className="text-sm text-slate-500">
+                            <span className="text-xs sm:text-sm text-slate-500">
                               / {user?.blueprintLimit === 99999 ? 'Unlimited' : user?.blueprintLimit}
                             </span>
                           </div>
@@ -299,24 +296,23 @@ function Settings() {
                             />
                           </div>
                         </div>
-                        <div className="rounded-xl border border-slate-800 bg-slate-900/30 p-4">
+                        <div className="rounded-xl border border-slate-800 bg-slate-900/30 p-3.5 sm:p-4">
                           <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400">
                             Usage Reset Date
                           </span>
-                          <div className="mt-2 text-lg font-bold text-white">
+                          <div className="mt-2 text-base sm:text-lg font-bold text-white">
                             {user?.monthlyResetDate
                               ? new Date(user.monthlyResetDate).toLocaleDateString()
                               : 'N/A'}
                           </div>
-                          <p className="text-xs text-slate-500 mt-1">
+                          <p className="text-[10px] sm:text-xs text-slate-500 mt-1 leading-relaxed">
                             Your monthly quota resets on this date.
                           </p>
                         </div>
                       </div>
                     </div>
 
-                    {/* Quick Actions */}
-                    <div className="mt-6 pt-5 border-t border-slate-800/50 flex flex-wrap gap-3">
+                    <div className="mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-slate-800/50 flex flex-wrap gap-2 sm:gap-3">
                       <Button
                         variant="secondary"
                         size="sm"
@@ -338,7 +334,7 @@ function Settings() {
 
             {/* Danger Zone Tab */}
             {activeTab === 'danger' && (
-              <div className="space-y-6">
+              <div className="space-y-5 sm:space-y-6">
                 <Card className="border-red-500/20">
                   <CardHeader>
                     <CardTitle className="text-red-400">Danger Zone</CardTitle>
@@ -347,19 +343,19 @@ function Settings() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="rounded-xl border border-red-500/20 bg-red-950/10 p-5">
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                        <div>
+                    <div className="rounded-xl border border-red-500/20 bg-red-950/10 p-4 sm:p-5">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+                        <div className="min-w-0">
                           <h4 className="text-sm font-bold text-white flex items-center gap-2">
-                            <AlertTriangle className="h-4 w-4 text-red-400" />
+                            <AlertTriangle className="h-4 w-4 text-red-400 shrink-0" />
                             Delete Account
                           </h4>
-                          <p className="text-xs text-slate-400 mt-1 max-w-md">
+                          <p className="text-xs text-slate-400 mt-1 leading-relaxed">
                             Permanently delete your account and all associated data including
                             blueprints, subscription, and usage history. This action cannot be undone.
                           </p>
                         </div>
-                        <div>
+                        <div className="shrink-0">
                           {!confirmDelete ? (
                             <Button
                               variant="danger"
@@ -396,11 +392,11 @@ function Settings() {
                       </div>
                     </div>
 
-                    <div className="mt-6 rounded-xl border border-slate-800 bg-slate-900/30 p-5">
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                        <div>
+                    <div className="mt-5 sm:mt-6 rounded-xl border border-slate-800 bg-slate-900/30 p-4 sm:p-5">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+                        <div className="min-w-0">
                           <h4 className="text-sm font-bold text-white">Sign Out</h4>
-                          <p className="text-xs text-slate-400 mt-1 max-w-md">
+                          <p className="text-xs text-slate-400 mt-1 leading-relaxed">
                             Sign out of your account on this device.
                           </p>
                         </div>

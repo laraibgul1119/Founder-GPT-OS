@@ -10,22 +10,22 @@ interface CardProps {
 
 export function Card({ children, className = '', hover = false }: CardProps) {
   return (
-    <div className={`rounded-2xl border border-slate-800 bg-slate-900/30 p-6 glass ${hover ? 'glow-card' : ''} ${className}`}>
+    <div className={`rounded-2xl border border-slate-800 bg-slate-900/30 p-4 sm:p-5 md:p-6 glass ${hover ? 'glow-card' : ''} ${className}`}>
       {children}
     </div>
   );
 }
 
 export function CardHeader({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return <div className={`mb-4 ${className}`}>{children}</div>;
+  return <div className={`mb-3 sm:mb-4 ${className}`}>{children}</div>;
 }
 
 export function CardTitle({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return <h3 className={`text-lg font-bold text-white ${className}`}>{children}</h3>;
+  return <h3 className={`text-base sm:text-lg font-bold text-white ${className}`}>{children}</h3>;
 }
 
 export function CardDescription({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return <p className={`mt-1 text-sm text-slate-400 ${className}`}>{children}</p>;
+  return <p className={`mt-1 text-xs sm:text-sm text-slate-400 leading-relaxed ${className}`}>{children}</p>;
 }
 
 export function CardContent({ children, className = '' }: { children: React.ReactNode; className?: string }) {

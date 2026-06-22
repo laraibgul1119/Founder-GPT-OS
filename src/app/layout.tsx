@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import React from 'react';
@@ -9,6 +9,14 @@ export const metadata: Metadata = {
   title: 'FounderGPT OS - AI Business Plan Generator',
   description: 'Generate complete, investor-ready business plans in minutes using AI.',
   keywords: 'startup, business plan, founder, investor ready, pitch deck outline, competitor analysis, personas',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: '#0f0f1e',
 };
 
 export default function RootLayout({
