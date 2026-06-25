@@ -120,4 +120,4 @@ src/
 
 ## License
 
-Private. All rights reserved.
+MIT license.
